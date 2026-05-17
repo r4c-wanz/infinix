@@ -1,122 +1,97 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useGSAP } from '@gsap/react';
 
-function App() {
-  const [count, setCount] = useState(0)
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
+
+export default function App() {
+  const main = useRef();
+  const smoother = useRef();
+
+  useGSAP(
+    () => {
+      smoother.current = ScrollSmoother.create({
+        smooth: 2,
+        effects: true,
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: main.current,
+        }
+      })
+
+      
+    },
+    { scope: main },
+  );
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div
+      id="smooth-wrapper"
+      ref={main}>
+      <div id="smooth-content">
+        <div className="section-6 w-dvw h-dvh bg-[url(https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/bg-content-pc.webp)] flex justify-between">
+          <div className="px-29 py-47">
+            <div className="max-w-107">
+              <h4 className="text-2xl leading-9 font-extrabold">Segalanya, Dirancang Ramping</h4>
+              <h3 className="text-4xl leading-9 font-extrabold">Layar Depan ArmorGlass</h3>
+              <p className="mt-4">Corning® Gorilla® Glass 7i tahan lebih banyak benturan dan lebih kuat terhadap goresan — tak mudah tergores oleh kunci, koin, atau bahkan pisau.</p>
+            </div>
+          </div>
+          <div className="px-29 py-14.5">
+            <div className='w-152.5 h-154 relative mask-[url(https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-blue-bg-pc.webp)] overflow-hidden'>
+              <div className="shadow-mask absolute left-0 top-0 right-0 bottom-0 z-2">
+                <img
+                  src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-shadow-mask-pc.webp"
+                  alt=""
+                  className="w-full h-full"
+                />
+              </div>
+              <div className="explode-content absolute left-0 top-0 right-0 bottom-0 z-1 mask-[url(https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-blue-bg-pc.webp)] overflow-hidden">
+                <div className="explode-part part-1 w-88 h-119.5 absolute left-[-20.6%] top-[-13%] z-4">
+                  <img
+                    src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-explode-part-1-pc.webp"
+                    alt=""
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="explode-part part-2 w-88 h-119.5 absolute right-[24%] bottom-[14%] z-3">
+                  <img
+                    src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-explode-part-2-pc.webp"
+                    alt=""
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="explode-part part-3 w-88 h-119.5 absolute right-[9%] bottom-[-12%] z-2">
+                  <img
+                    src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-explode-part-3-pc.webp"
+                    alt=""
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="explode-part part-4 w-88 h-119.5 absolute right-[-7.1%] bottom-[-31%] z-1">
+                  <img
+                    src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-explode-part-4-pc.webp"
+                    alt=""
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
+              <div className="blue-bg absolute left-0 top-0 right-0 bottom-0">
+                <img
+                  src="https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/sec6-blue-bg-pc.webp"
+                  alt=""
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <div className="w-dvw h-dvh bg-[url(https://d3o31au25zfcly.cloudfront.net/newfileadmin/usp/hot/hot-60-pro/sec6/pc/bg-content-pc.webp)]"></div>
+      </div>
+    </div>
+  );
 }
-
-export default App
